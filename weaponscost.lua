@@ -8,7 +8,7 @@ local weaponcost = {
 ['AGM_114K'] = 10000,
 
 -- GUN -- 
-['M230'] = 100
+['M_230_new'] = 100
 
 -- ROCKETS --
 }
@@ -34,7 +34,7 @@ function Frosty_ShotEvent:onEvent(event)
 	if event.id == 24 then
 		local time_taken = event.time - shooting_start
 		fprint("Shooting Duration: " .. time_taken)
-		fprint(time_taken * m230_rof)
+		fprint(math.modf(time_taken * m230_rof))
 	end
 end
 
