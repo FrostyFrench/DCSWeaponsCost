@@ -10,7 +10,7 @@ local weaponcost = {
 ['AGM_114K'] = 10000,
 
 -- GUN -- 
-['M_230_new'] = 100
+['M_230_new'] = 100,
 
 -- ROCKETS --
 ['HYDRA_70_M151'] = 2000
