@@ -22,25 +22,29 @@ end
 
 function Frosty_ShotEvent:onEvent(event)
 	if event.id == 1 then
-		--subtotal = subtotal + weaponcost[event.weapon]
-		fprint(event.weapon:getTypeName())
-		fprint(event.initiator:getCoalition())
+		fprint("Weapon Name: " .. event.weapon:getTypeName())
+		fprint("Initiator Coalition: " .. event.initiator:getCoalition())
+		subtotal = subtotal + weaponcost[event.weapon:getTypeName()]
 	end
 	if event.id == 23 then
 		shooting_start = event.time
 		fprint("shooting_start: " .. shooting_start)
-		fprint(event.weapon_name)
+		fprint("Weapon Name: " .. event.weapon_name)
 	end
 	if event.id == 24 then
 		local time_taken = event.time - shooting_start
 		fprint("Shooting Duration: " .. time_taken)
-		fprint(math.modf(time_taken * m230_rof))
+		local rounds_fired = math.modf(time_taken * m230_rof)
+		fprint("Rounds Fired: " .. rounds_fired)
+		subtotal = subtotal + (weaponcost[event.weapon_name] * rounds_fired)
 	end
 end
 
 world.addEventHandler(Frosty_ShotEvent)
 
 function outtoscreen()
-	fprint(subtotal .. 'Dollarinos')
+	fprint("Total: $" .. subtotal .. ' Dollarinos')
 	timer.scheduleFunction(outotscreen, timer.getTime() + 11)
 end
+
+outtoscreen()
