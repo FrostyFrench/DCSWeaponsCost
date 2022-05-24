@@ -1,5 +1,7 @@
 Frosty_ShotEvent = {}
-local subtotal = 0
+subtotal = 0
+shooting_start = 0
+local m230_rof = 620 / 60
 
 local weaponcost = {
 -- MISSILES --
@@ -23,6 +25,15 @@ function Frosty_ShotEvent:onEvent(event)
 		--subtotal = subtotal + weaponcost[event.weapon]
 		fprint(event.weapon:getTypeName())
 		fprint(event.initiator:getCoalition())
+	end
+	if event.id == 23
+		shooting_start = event.Time
+		fprint(event.weapon:getTypeName())
+	end
+	if event.id == 24
+		local time_taken = event.Time - shooting_start
+		fprint("Shooting Duration: " ... time_taken)
+		fprint(time_taken * m230_rof)
 	end
 end
 
