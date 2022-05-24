@@ -10,10 +10,11 @@ local weaponcost = {
 ['AGM_114K'] = 10000,
 
 -- GUN -- 
-['M_230_new'] = 100,
+['M_230_new'] = 105,
 
 -- ROCKETS --
-['HYDRA_70_M151'] = 2000
+['HYDRA_70_M151'] = 2000,
+['HYDRA_70_M229'] = 2500
 }
 
 function fprint(...)
@@ -32,8 +33,12 @@ end
 function Frosty_ShotEvent:onEvent(event)
 	if event.id == 1 then
 		db_fprint("Weapon Name: " .. event.weapon:getTypeName())
-		subtotal = subtotal + weaponcost[event.weapon:getTypeName()]
 		db_fprint("Initiator Coalition: " .. event.initiator:getCoalition())
+		if weaponcost[event.weapon:getTypeName()] ~= nil then
+			subtotal = subtotal + weaponcost[event.weapon:getTypeName()]
+		else
+			db_fprint("Weapon Not Found: " .. event.weapon:getTypeName())
+		end
 	end
 	if event.id == 23 then
 		shooting_start = event.time
@@ -45,7 +50,11 @@ function Frosty_ShotEvent:onEvent(event)
 		db_fprint("Shooting Duration: " .. time_taken)
 		local rounds_fired = math.modf(time_taken * m230_rof)
 		db_fprint("Rounds Fired: " .. rounds_fired)
-		subtotal = subtotal + (weaponcost[event.weapon_name] * rounds_fired)
+		if weaponcost[event.weapon_name] ~= nil then
+			subtotal = subtotal + (weaponcost[event.weapon_name] * rounds_fired)
+		else
+			db_fprint("Weapon Not Found: " .. event.weapon_name)
+		end
 	end
 end
 
