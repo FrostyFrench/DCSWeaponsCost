@@ -26,11 +26,11 @@ function Frosty_ShotEvent:onEvent(event)
 		fprint(event.weapon:getTypeName())
 		fprint(event.initiator:getCoalition())
 	end
-	if event.id == 23
+	if event.id == 23 then
 		shooting_start = event.Time
 		fprint(event.weapon:getTypeName())
 	end
-	if event.id == 24
+	if event.id == 24 then
 		local time_taken = event.Time - shooting_start
 		fprint("Shooting Duration: " ... time_taken)
 		fprint(time_taken * m230_rof)
