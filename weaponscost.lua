@@ -44,7 +44,7 @@ world.addEventHandler(Frosty_ShotEvent)
 
 function outtoscreen()
 	fprint("Total: $" .. subtotal .. ' Dollarinos')
-	timer.scheduleFunction(outotscreen, timer.getTime() + 11)
+	timer.scheduleFunction(outotscreen, {}, timer.getTime() + 11)
 end
 
 outtoscreen()
